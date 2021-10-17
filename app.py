@@ -46,9 +46,15 @@ def index():
             sentiment_rating = vader.polarity_scores(enhanced_transcript)
             th = word_tokenize(transcript)
             show = nltk.pos_tag(th)
-
-
-            print(show)
+            x = parts_of_speech_categorize(show)
+            nouns = x[0]
+            verbs = x[1]
+            adjectives = x[2]
+            adverbs = x[3]
+            prepositions = x[4]
+            determiners = x[5]
+            pronouns = x[6]
+            conjunctions = x[7]
 
     return render_template('index.html', transcript=transcript,
                            char_count=char_count, word_count=word_count,
@@ -74,6 +80,7 @@ def total_letters(var):
 
 def total_words(var):
     return len(var.split())
+
 
 
 if __name__ == "__main__":
