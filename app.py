@@ -8,6 +8,8 @@ from fastpunct import FastPunct
 app = Flask(__name__)
 
 nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -42,12 +44,16 @@ def index():
 
             vader = SentimentIntensityAnalyzer()
             sentiment_rating = vader.polarity_scores(enhanced_transcript)
-            # tech_text = word_tokenize(transcript)
-            # show = nltk.pos_tag(tech_text)
+            th = word_tokenize(transcript)
+            show = nltk.pos_tag(th)
+
+
+            print(show)
 
     return render_template('index.html', transcript=transcript,
                            char_count=char_count, word_count=word_count,
-                           letter_count=letter_count, enhanced_transcript=enhanced_transcript,
+                           letter_count=letter_count,
+                           enhanced_transcript=enhanced_transcript,
                            sentiment_rating=sentiment_rating)
 
 
