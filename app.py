@@ -39,8 +39,8 @@ def index():
             char_count = total_chars(transcript)
             letter_count = total_letters(transcript)
             word_count = total_words(transcript)
-            fastpunct = FastPunct()
-            enhanced_transcript = fastpunct.punct(transcript)
+            fast_punct = FastPunct()
+            enhanced_transcript = fast_punct.punct(transcript)
 
             vader = SentimentIntensityAnalyzer()
             sentiment_rating = vader.polarity_scores(enhanced_transcript)
@@ -80,7 +80,6 @@ def total_letters(var):
 
 def total_words(var):
     return len(var.split())
-
 
 
 if __name__ == "__main__":

@@ -1,42 +1,201 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Speech To Text Analyzer</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
 
-</head>
-<body>
-<div id="speechContainer">
-    <h1>Upload new File</h1>
-    <form method="post" enctype="multipart/form-data">
-        <input type="file" name="file"/>
-        <br>
-        <input type="submit" value="Transcribe"/>
-    </form>
-    {%if transcript != "" %}
-    <div id="speechTranscriptionContainer">
-        <h1>Transcript</h1>
-        <p>{{transcript}}</p>
-    {% endif %}
-        <br>
-    {%if enhanced_transcript != "" %}
-        <h1>Enhanced Transcript</h1>
-        <p>{{enhanced_transcript}}</p>
-    {% endif %}
-    </div>
-    <div>
-        <h2> Transcript Stats</h2>
-        <p> Total Characters: {{char_count}}
-            <br>
-            Total Words: {{word_count}}
-            <br>
-            Total Letters Minus Spaces: {{letter_count}}
-            {%if enhanced_transcript != "" %}
-        <h1>Parts of Speech Analysis</h1>
-        <p>{{sentiment_rating}}</p>
-        {% endif %}
-        </p>
-    </div>
-</div>
-</body>
+		<!-- Wrapper -->
+			<div id="wrapper" class="divided">
+
+				<!-- Banner -->
+					<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+						<div class="content">
+							<h1>Speech to Text Analyzer</h1>
+							<p class="major"> Elevate your audio files and take a deeper look under the hood</p>
+							<p>Upload .wav audio file to convert to text and get sentiment analysis, parts of speech analysis, and so much more!</p>
+							<form method="post" enctype="multipart/form-data">
+								<input type="file" name="file">
+								<br>
+								<br>
+								<input type="submit" value="Transcribe"/>
+							</form>
+						</div>
+						<div class="image">
+							<img src="images/banner.jpg" alt="" />
+						</div>
+					</section>
+				<!-- Results -->
+					<section class="wrapper style1 align-center">
+						{%if transcript != "" %}
+						<div class="inner">
+							<h2>Your Audio File Analyzed:</h2>
+							<p>Your Speech Potential Now Unlocked</p>
+							<div class="index align-left">
+
+								<!-- Transcript -->
+									<section>
+										<header>
+											<h3>Transcript</h3>
+										</header>
+										<div class="content">
+											<p> {{transcript}}</p>
+										</div>
+									</section>
+								{% endif %}
+								<!-- Enhanced Transcript -->
+									<section>
+										<div class="content">
+											<header>
+												<h3>Enhanced Transcript</h3>
+												<p>We used fastpunk package to transform the gramatically unstructured transcript into a more refined piece of text that could be be easily be understood by the users.</p>
+											</header>
+											<p>enhanced transcript goes here</p>
+
+										</div>
+									</section>
+
+								<!-- Transcript Stats -->
+									<section>
+										<header>
+											<h3>Transcript Stats</h3>
+										</header>
+										<div class="content">
+											<div class="table-wrapper">
+												<table>
+													<thead>
+														<tr>
+															<th>Name</th>
+															<th>Corresponding Value</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>Total Characters</td>
+															<td>0</td>
+														</tr>
+														<tr>
+															<td>Total Words</td>
+															<td>0</td>
+														</tr>
+														<tr>
+															<td>Total Letters Minus Spaces</td>
+															<td>0</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</section>
+
+                                <!-- Sentiment Analysis -->
+									<section>
+										<div class="content">
+											<header>
+												<h3> Sentiment Analysis</h3>
+												<p>Scans text for positive and negative sentiments and returns a report to the user using the nltk SentimentIntestityAnalyzer</p>
+											</header>
+											<p>sentiment analysis goes here</p>
+
+										</div>
+									</section>
+
+
+
+				<!-- Modifiers -->
+					<section class="wrapper style1 align-center" id="reference">
+						<div class="inner">
+							<h2>Part of Speech Analysis</h2>
+							<p>Returns parts of speech like nouns, verbs, adjectives, etc, so that the user can analyze how their speech is composed.</p>
+							<div class="index align-left">
+
+                                <section>
+										<header>
+											<h3>Stats</h3>
+										</header>
+										<div class="content">
+											<div class="table-wrapper">
+												<table>
+													<thead>
+														<tr>
+															<th>Part of Speech</th>
+															<th>Number of Occurance</th>
+                                                            <th>Words (List)</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>Noun</td>
+															<td>0</td>
+                                                            <td>[]</td>
+														</tr>
+														<tr>
+															<td>Verbs</td>
+															<td>0</td>
+                                                            <td>[]</td>
+														</tr>
+                                                        <tr>
+															<td>Adjectives</td>
+															<td>0</td>
+                                                            <td>[]</td>
+														</tr>
+                                                        <tr>
+															<td>Adverbs</td>
+															<td>0</td>
+                                                            <td>[]</td>
+														</tr>
+                                                        <tr>
+															<td>Conjunctions</td>
+															<td>0</td>
+                                                            <td>[]</td>
+														</tr>
+                                                        <tr>
+															<td>Prepositions</td>
+															<td>0</td>
+                                                            <td>[]</td>
+														</tr>
+                                                        <tr>
+															<td>Pronouns</td>
+															<td>0</td>
+                                                            <td>[]</td>
+														</tr>
+                                                        <tr>
+															<td>Determiner</td>
+															<td>0</td>
+                                                            <td>[]</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</section>
+							</div>
+						</div>
+					</section>
+				<!-- Footer -->
+					<footer class="wrapper style1 align-center">
+						<div class="inner">
+							<p>&copy; A Tool by Justice Tomlinson and Ratantej Madan. Website Desigin Inspired By <a href="https://html5up.net">HTML5 UP</a>. Copyright 2021</p>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+		<!-- Note: Only needed for demo purposes. Delete for production sites. -->
+			<script src="assets/js/demo.js"></script>
+
+	</body>
 </html>
