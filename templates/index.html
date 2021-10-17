@@ -4,8 +4,8 @@
 		<title>Speech To Text Analyzer</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="../static/styles/main.css" />
+		<noscript><link rel="stylesheet" href="../static/styles/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
 
@@ -26,7 +26,7 @@
 							</form>
 						</div>
 						<div class="image">
-							<img src="images/banner.jpg" alt="" />
+							<img src="../static/images/banner.jpg" alt="" />
 						</div>
 					</section>
 				<!-- Results -->
@@ -49,18 +49,21 @@
 								{% endif %}
 								<!-- Enhanced Transcript -->
 									<section>
+										{%if enhanced_transcript != "" %}
 										<div class="content">
 											<header>
 												<h3>Enhanced Transcript</h3>
 												<p>We used fastpunk package to transform the gramatically unstructured transcript into a more refined piece of text that could be be easily be understood by the users.</p>
 											</header>
-											<p>enhanced transcript goes here</p>
+											<p>{{enhanced_transcript}}</p>
 
 										</div>
 									</section>
+								{% endif %}
 
 								<!-- Transcript Stats -->
 									<section>
+										{%if enhanced_transcript != "" %}
 										<header>
 											<h3>Transcript Stats</h3>
 										</header>
@@ -76,38 +79,41 @@
 													<tbody>
 														<tr>
 															<td>Total Characters</td>
-															<td>0</td>
+															<td>{{char_count}}</td>
 														</tr>
 														<tr>
 															<td>Total Words</td>
-															<td>0</td>
+															<td>{{word_count}}</td>
 														</tr>
 														<tr>
 															<td>Total Letters Minus Spaces</td>
-															<td>0</td>
+															<td>{{letter_count}}</td>
 														</tr>
 													</tbody>
 												</table>
 											</div>
 										</div>
 									</section>
+								{% endif %}
 
                                 <!-- Sentiment Analysis -->
 									<section>
+										{%if enhanced_transcript != "" %}
 										<div class="content">
 											<header>
 												<h3> Sentiment Analysis</h3>
 												<p>Scans text for positive and negative sentiments and returns a report to the user using the nltk SentimentIntestityAnalyzer</p>
 											</header>
-											<p>sentiment analysis goes here</p>
+											<p>{{sentiment_rating}}</p>
 
 										</div>
 									</section>
-
+								{% endif %}
 
 
 				<!-- Modifiers -->
 					<section class="wrapper style1 align-center" id="reference">
+						{%if enhanced_transcript != "" %}
 						<div class="inner">
 							<h2>Part of Speech Analysis</h2>
 							<p>Returns parts of speech like nouns, verbs, adjectives, etc, so that the user can analyze how their speech is composed.</p>
@@ -130,43 +136,43 @@
 													<tbody>
 														<tr>
 															<td>Noun</td>
-															<td>0</td>
-                                                            <td>[]</td>
+															<td>{{nouns|length}}</td>
+                                                            <td>{{nouns}}</td>
 														</tr>
 														<tr>
 															<td>Verbs</td>
-															<td>0</td>
-                                                            <td>[]</td>
+															<td>{{verbs|length}}</td>
+															<td>{{verbs}}</td>
 														</tr>
                                                         <tr>
 															<td>Adjectives</td>
-															<td>0</td>
-                                                            <td>[]</td>
+															<td>{{adjectives|length}}</td>
+															<td>{{adjectives}}</td>
 														</tr>
                                                         <tr>
 															<td>Adverbs</td>
-															<td>0</td>
-                                                            <td>[]</td>
+															<td>{{adverbs|length}}</td>
+															<td>{{adverbs}}</td>
 														</tr>
                                                         <tr>
 															<td>Conjunctions</td>
-															<td>0</td>
-                                                            <td>[]</td>
+															<td>{{conjunctions|length}}</td>
+															<td>{{conjunctions}}</td>
 														</tr>
                                                         <tr>
 															<td>Prepositions</td>
-															<td>0</td>
-                                                            <td>[]</td>
+															<td>{{prepositions|length}}</td>
+															<td>{{prepositions}}</td>
 														</tr>
                                                         <tr>
 															<td>Pronouns</td>
-															<td>0</td>
-                                                            <td>[]</td>
+															<td>{{pronouns|length}}</td>
+															<td>{{pronouns}}</td>
 														</tr>
                                                         <tr>
 															<td>Determiner</td>
-															<td>0</td>
-                                                            <td>[]</td>
+															<td>{{determiners|length}}</td>
+															<td>{{determiners}}</td>
 														</tr>
 													</tbody>
 												</table>
@@ -176,6 +182,7 @@
 							</div>
 						</div>
 					</section>
+								{% endif %}
 				<!-- Footer -->
 					<footer class="wrapper style1 align-center">
 						<div class="inner">
@@ -186,16 +193,16 @@
 			</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+			<script src="../static/js/jquery.min.js"></script>
+			<script src="../static/js/jquery.scrollex.min.js"></script>
+			<script src="../static/js/jquery.scrolly.min.js"></script>
+			<script src="../static/js/browser.min.js"></script>
+			<script src="../static/js/breakpoints.min.js"></script>
+			<script src="../static/js/util.js"></script>
+			<script src="../static/js/main.js"></script>
 
 		<!-- Note: Only needed for demo purposes. Delete for production sites. -->
-			<script src="assets/js/demo.js"></script>
+			<script src="../static/js/demo.js"></script>
 
 	</body>
 </html>
