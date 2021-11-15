@@ -8,16 +8,16 @@
 		<noscript><link rel="stylesheet" href="../static/styles/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
-
 		<!-- Wrapper -->
 			<div id="wrapper" class="divided">
-
 				<!-- Banner -->
-					<section class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+					<section class="banner style1 orient-left content-align-left image-position-right
+					 fullscreen onload-image-fade-in onload-content-fade-right">
 						<div class="content">
 							<h1>Speech to Text Analyzer</h1>
 							<p class="major"> Elevate your audio files and take a deeper look under the hood</p>
-							<p>Upload .wav audio file to convert to text and get sentiment analysis, parts of speech analysis, and so much more!</p>
+							<p>Upload .wav audio file to convert to text and get sentiment analysis,
+								parts of speech analysis, and so much more!</p>
 							<form method="post" enctype="multipart/form-data">
 								<input type="file" name="file">
 								<br>
@@ -36,7 +36,6 @@
 							<h2>Your Audio File Analyzed:</h2>
 							<p>Your Speech Potential Now Unlocked</p>
 							<div class="index align-left">
-
 								<!-- Transcript -->
 									<section>
 										<header>
@@ -53,14 +52,14 @@
 										<div class="content">
 											<header>
 												<h3>Enhanced Transcript</h3>
-												<p>We used fastpunk package to transform the gramatically unstructured transcript into a more refined piece of text that could be be easily be understood by the users.</p>
+												<p>We used fastpunc package to transform the gramatically
+													unstructured transcript into a more refined piece of text
+													that could be be easily be understood by the users.</p>
 											</header>
 											<p>{{enhanced_transcript}}</p>
-
 										</div>
 									</section>
 								{% endif %}
-
 								<!-- Transcript Stats -->
 									<section>
 										{%if enhanced_transcript != "" %}
@@ -95,30 +94,27 @@
 										</div>
 									</section>
 								{% endif %}
-
                                 <!-- Sentiment Analysis -->
 									<section>
 										{%if enhanced_transcript != "" %}
 										<div class="content">
 											<header>
 												<h3> Sentiment Analysis</h3>
-												<p>Scans text for positive and negative sentiments and returns a report to the user using the nltk SentimentIntestityAnalyzer</p>
+												<p>Scans text for positive and negative sentiments and returns a report
+													to the user using the nltk SentimentIntestityAnalyzer</p>
 											</header>
 											<p>{{sentiment_rating}}</p>
-
 										</div>
 									</section>
 								{% endif %}
-
-
 				<!-- Modifiers -->
 					<section class="wrapper style1 align-center" id="reference">
 						{%if enhanced_transcript != "" %}
 						<div class="inner">
 							<h2>Part of Speech Analysis</h2>
-							<p>Returns parts of speech like nouns, verbs, adjectives, etc, so that the user can analyze how their speech is composed.</p>
+							<p>Returns parts of speech like nouns, verbs, adjectives, etc, so that the user can analyze
+								how their speech is composed.</p>
 							<div class="index align-left">
-
                                 <section>
 										<header>
 											<h3>Stats</h3>
@@ -186,12 +182,12 @@
 				<!-- Footer -->
 					<footer class="wrapper style1 align-center">
 						<div class="inner">
-							<p>&copy; A Tool by Justice Tomlinson and Ratantej Madan. Website Desigin Inspired By <a href="https://html5up.net">HTML5 UP</a>. Copyright 2021</p>
+							<p>&copy; A Tool by Justice Tomlinson and Ratantej Madan.
+								Website Desigin Inspired By <a href="https://html5up.net">HTML5 UP</a>.
+								Copyright 2021</p>
 						</div>
 					</footer>
-
 			</div>
-
 		<!-- Scripts -->
 			<script src="../static/js/jquery.min.js"></script>
 			<script src="../static/js/jquery.scrollex.min.js"></script>
@@ -200,9 +196,8 @@
 			<script src="../static/js/breakpoints.min.js"></script>
 			<script src="../static/js/util.js"></script>
 			<script src="../static/js/main.js"></script>
-
 		<!-- Note: Only needed for demo purposes. Delete for production sites. -->
 			<script src="../static/js/demo.js"></script>
-
+						</div>
 	</body>
 </html>

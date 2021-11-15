@@ -4,7 +4,7 @@ import speech_recognition as sr
 from nltk import word_tokenize
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from fastpunct import FastPunct
-from typing import List, Dict
+from typing import List, Dict, Any
 
 app = Flask(__name__)
 
@@ -14,27 +14,20 @@ nltk.download('averaged_perceptron_tagger')
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    sentiment_rating = 0
-    show = 0
-    char_count = 0
-    word_count = 0
-    letter_count = 0
-    transcript = ""
-    enhanced_transcript = ""
-    tech_text = ""
-    tokenized_transcript = ""
-    nouns, verbs, adjectives, adverbs, prepositions, determiners, pronouns, \
-    conjunctions = [], [], [], [], [], [], [], []
+    """
+    :return: returns the mutated transcript to index.html so that statistics about the transcript can be displayed
+    to the user.
+    """
+    sentiment_rating, show, char_count, word_count, letter_count = [0]*5
+    transcript, enhanced_transcript, tokenized_transcript = [""]*3
+    nouns, verbs, adjectives, adverbs, prepositions, determiners, pronouns, conjunctions = [[]]*8
     if request.method == "POST":
         print("FORM DATA RECEIVED")
-
         if "file" not in request.files:
             return redirect(request.url)
-
         file = request.files["file"]
         if file.filename == "":
             return redirect(request.url)
-
         if file:
             recognizer = sr.Recognizer()
             audioFile = sr.AudioFile(file)
@@ -46,7 +39,6 @@ def index():
             word_count = total_words(transcript)
             fast_punct = FastPunct()
             enhanced_transcript = fast_punct.punct(transcript)
-
             vader = SentimentIntensityAnalyzer()
             sentiment_rating = vader.polarity_scores(enhanced_transcript)
             tokenized_transcript = word_tokenize(transcript)
@@ -76,14 +68,24 @@ def index():
                                tokenized_transcript))
 
 
-def total_chars(transcript):
+def total_chars(transcript: str) -> int:
+    """
+    Sums the total amount of characters in the transcript.
+    :param transcript: A string containing the contents of the transcribed audio file.
+    :return: Returns the number of characters in the file.
+    """
     counter = 0
     for i in transcript:
         counter += 1
     return counter
 
 
-def total_letters(transcript):
+def total_letters(transcript: str) -> int:
+    """
+    Sums the total amount of non-space characters in the transcript.
+    :param transcript: A string containing the contents of the transcribed audio file.
+    :return: Returns the number of letters in the file.
+    """
     counter = 0
     for i in transcript:
         if i != " ":
@@ -91,13 +93,22 @@ def total_letters(transcript):
     return counter
 
 
-def total_words(transcript):
+def total_words(transcript: str) -> int:
+    """
+    Returns the total number of words in the transcript.
+    :param transcript: A string containing the contents of the transcribed audio file.
+    :return: Returns the number of words in the file.
+    """
     return len(transcript.split())
 
 
-def parts_of_speech_categorize(postag_transcript):
-    nouns, verbs, adjectives, adverbs, prepositions, determiners, pronouns, \
-    conjunctions = [], [], [], [], [], [], [], []
+def parts_of_speech_categorize(postag_transcript: list) -> tuple[Any, Any, Any, Any, Any, Any, Any, Any]:
+    """
+    Iterates through the tokenized, POS (Part Of Speech) assigned transcript
+    :param postag_transcript: Transcript file tokenized and assigned a POS label by the nltk package.
+    :return: Returns a tuple, each index of which contains a list of words that pertain to a given POS.
+    """
+    nouns, verbs, adjectives, adverbs, prepositions, determiners, pronouns, conjunctions = [[]]*8
     for item in postag_transcript:
         word = item[0]
         POS = item[1]
@@ -117,11 +128,15 @@ def parts_of_speech_categorize(postag_transcript):
             pronouns.append(word)
         elif POS in ['RB', 'RBR', 'RBS']:
             adverbs.append(word)
-    return nouns, verbs, adjectives, adverbs, prepositions, determiners, \
-           pronouns, conjunctions
+    return nouns, verbs, adjectives, adverbs, prepositions, determiners, pronouns, conjunctions
 
 
-def most_commonly_used_words(split_words):
+def most_commonly_used_words(split_words: list) -> dict:
+    """
+    :param split_words: tokenized transcript.
+    :return: Returns a dictionary with keys containing each word in the dictionary and values containing the amount of times it
+    was used.
+    """
     most_common = {}
     for word in split_words:
         if word not in most_common:
@@ -131,7 +146,6 @@ def most_commonly_used_words(split_words):
     most_common_lite = {}
     for key, value in most_common.items():
         most_common_lite[value] = key
-
     sorted_by_val = sorted(most_common.values())
     fully_sorted = {}
     for i in sorted_by_val:
